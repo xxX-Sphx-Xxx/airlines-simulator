@@ -1,4 +1,4 @@
-# airlines-simulator<T
+# airlines-simulator
 
 To Do:
 - IHM HTML 5
