@@ -1,0 +1,45 @@
+Airlines-Calculator
+|
+|
+|
++------Accueil
+|
+|
+|
++------Quelles Destinations ?
+|
+|
+|
++------Quel avion ?
+|
+|
+|
++------Quel hub de départ ?
+|
+|
+|
++------Blog
+
+
+Vue = fonctions python, transmet la requête au template
+Template = Code HTML
+Modèles = Interfaces qui permet d'accéder a des données dans une base et la mettre à jour (partie dynamique)
+app_urls = gestion des urls par application
+urls = gestion global des urls
+
+
+Règle de gestion des catégorie
+
+Si Catégorie avion est supérieur a la catégorie de l'aéroport, l'avion ne peut y aller
+
+Lors de la selection des champs:
+ Si catégorie avion > cat départ ou catégorie avion > cat destination -> afficher erreur ! l'avion ne peut pas aller sur ce hub
+Dans le cas de la recherche de destination il fau que le résultat soit:
+1 - Filtrer les hubs entre catégorie départ et catégorie destination
+2 - Retirer les hubs qui ont une catégorie inférieur a celle de l'avion
+
+
+Catégorie de la ligne 	Catégorie de l’avion 	Compatibilité
+5 	2 	COMPATIBLE
+3 	6 	NON COMPATIBLE
+9 	9 	COMPATIBLE

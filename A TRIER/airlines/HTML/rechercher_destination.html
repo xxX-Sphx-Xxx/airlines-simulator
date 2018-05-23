@@ -1,0 +1,87 @@
+ <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Rechercher une destination</title>
+	</head>
+	<body>
+		<h1>Recherche</h1>
+		<div>
+			<form action="rechercher_destination.py" method="post">
+				<p>
+					<label for="hub_départ">Hub de départ</label><br />
+					     <select name="hub_départ" id="hub_départ">
+					     	<option value="1" selected>France</option>
+					     	<option value="2">Royaume-Unis</option>
+					     	<option value="3">Etat-unis</option>
+					     </select>
+				</p>
+				<p>
+					<label for="categorie_min">Catégorie Minimum</label><br />
+					     <select name="categorie_min" id="categorie_min">
+					     	<option value="1" selected>Catégorie 1</option>
+					     	<option value="2">Catégorie 2</option>
+					     	<option value="3">Catégorie 3</option>
+					     	<option value="4">Catégorie 4</option>
+					     	<option value="5">Catégorie 5</option>
+					     	<option value="6">Catégorie 6</option>
+					     	<option value="7">Catégorie 7</option>
+					     	<option value="8">Catégorie 8</option>
+					     	<option value="9">Catégorie 9</option>
+					     	<option value="10">Catégorie 10</option>
+					     </select>
+				</p>
+				<p>
+					<label for="categorie_max">Catégorie Max</label><br />
+					     <select name="categorie_max" id="categorie_max">
+					     	<option value="1">Catégorie 1</option>
+					     	<option value="2">Catégorie 2</option>
+					     	<option value="3">Catégorie 3</option>
+					     	<option value="4">Catégorie 4</option>
+					     	<option value="5">Catégorie 5</option>
+					     	<option value="6">Catégorie 6</option>
+					     	<option value="7">Catégorie 7</option>
+					     	<option value="8">Catégorie 8</option>
+					     	<option value="9">Catégorie 9</option>
+					     	<option value="10" selected>Catégorie 10</option>
+					     </select>
+				</p>
+				<p>
+					<label for="avions">Avions</label><br />
+					     <select name="avions" id="avions">
+					     	<option value="1" selected>A380-400 (Cat. 10)</option>
+					     	<option value="2">A310-200 (cat. 7)</option>
+					     </select>
+				</p>
+				<fieldset>
+					<legend>Durée A/R</legend>
+					<label for="heure_h_min"></label><br />
+						<select name="heure_h_min" id="heure_h_min">
+							<option value="0" selected>0</option>
+							<option value="1">1</option>
+					     </select>
+					<label for="heure_m_min"></label><br />
+						     <select name="heure_m_min" id="heure_m_min">
+						     	<option value="0" selected>0</option>
+						     	<option value="15">15</option>
+						     	<option value="20">30</option>
+						     	<option value="45">45</option>
+						     </select>
+					<label for="heure_h_max"></label><br />
+						     <select name="heure_h_max" id="heure_h_max">
+						     	<option value="0">0</option>
+						     	<option value="1" selected>1</option>
+						     </select>
+					<label for="heure_m_max"></label><br />
+						     <select name="heure_m_max" id="heure_m_max">
+						     	<option value="0">0</option>
+						     	<option value="15">15</option>
+						     	<option value="20">30</option>
+						     	<option value="45" selected>45</option>
+						     </select>
+				</fieldset>		
+				<input type="submit" value="Rechercher"/>
+				<input type="reset" value="Réinitialiser"/>						
+			</form>
+	</body>
+</html> 

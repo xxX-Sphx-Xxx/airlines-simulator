@@ -1,0 +1,3 @@
+Pour importer, utiliser 
+
+from python_file import */function

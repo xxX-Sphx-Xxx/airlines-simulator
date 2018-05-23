@@ -1,0 +1,67 @@
+Règle de gestion des catégorie
+Si Catégorie avion est supérieur a la catégorie de l'aéroport, l'avion ne peut y aller
+Lors de la selection des champs:
+ Si catégorie avion > cat départ ou catégorie avion > cat destination -> afficher erreur ! l'avion ne peut pas aller sur ce hub
+Dans le cas de la recherche de destination il fau que le résultat soit:
+1 - Filtrer les hubs entre catégorie départ et catégorie destination
+2 - Retirer les hubs qui ont une catégorie inférieur a celle de l'avion
+
+ex:
+Catégorie de la ligne 	Catégorie de l’avion 	Compatibilité
+5 						2 						COMPATIBLE
+3 						6 						NON COMPATIBLE
+9 						9 						COMPATIBLE
+
+/!\ Il faut surement créer une vue a la place d'une table
+
+Formulaire : Mettre des paramètres par défault. Il y aura toujours une valeur
+
+Algo:
+récupérer hub_depart_id, hub_categorie_min, hub_categorie_max, avion_categorie_id, heure_h_min, heure_m_min, heure_h_max,heure_m_max
+SELECTIONNER TOUS LES HUBS qui ont une categorie inférieur a l avion et compris entre categorie min et max
+Pour chaque HUB CALCULER LA DISTANCE et tj
+Si Distance <= avion.rayon et temps_trajet compris entre tj_min et tj_max on stock dans une table temporaire
+
+Exemple cas par défault:
+hub_depart_id = 1
+hub_categorie_min= 1
+hub_categorie_min = 10
+avion_categorie_id = 10
+tj_min = heure_h_min + heure_m_min
+tj_max = heure_h_max + heure_m_max
+
+
+
+cursor.execute("""SELECT hub_latitude, hub_longitude FROM t_hub WHERE hub_id = %s""",(hub_depart_id))
+hub_depart = cursor.fetchone()
+for hub_latitude, hub_longitude in hub_depart:
+	hub_depart_latitude = hub_latitude
+	hub_depart_longitude = hub_longitude
+
+cursor.execute("""SELECT h.hub_id h.hub_iata, p.pays_name, h.hub_latitude, h.hub_longitude, h.hub_categorie FROM t_hub as h LEFT JOIN t_pays AS p on h.pays_id = p.pays_id WHERE hub_categorie BETWEEN %s AND %s AND hub_categorie <= %s""",(hub_categorie_min,hub_categorie_max,avion_categorie_id))
+hubs_destination = cursor.fetchall()
+cursor.execute("""SELECT vitesse FROM t_avion WHERE avion_id = %s""",(avion_id))
+vitesse_avion = cursor.fetchall()
+cursor.execute("""CREATE TEMPORARY TABLE IF NOT EXISTS t_destinations AS (SELECT))
+for hub_destination in hubs_destination:
+	distance = hub_distance(hub_depart_latitude,hub_depart_longitude,hub_destination[3],hub_destination[4])
+	temps_trajet = tj(distance,vitesse_avion)
+
+
+
+cursor.execute("""SELECT id, name, age FROM users WHERE id = %s""", ("5", ))
+rows = cursor.fetchall()
+for row in rows:
+    print('{0} : {1} - {2}'.format(row[0], row[1], row[2]))
+
+
+
+hubs = cursor.fetchall()
+
+for hub_latitude, hub_longitude in hubs:
+	hub_distance(hub_latitude,hub_longitude)
+
+def hub_distance(latitude1, longitude1, latitude2, longitude2):
+	""" Fonction qui calcul la distance entre deux aéroports en utilisant la latidue et la longitude et un rayon de 6378 Km """
+	rayon = 6378
+	return math.acos(math.sin(deg2rad(latitude1))*(math.sin(deg2rad(latitude2)))+math.cos(deg2rad(latitude1))*math.cos(deg2rad(latitude2))*math.cos(deg2rad(longitude1) - deg2rad(longitude2))) * rayon
